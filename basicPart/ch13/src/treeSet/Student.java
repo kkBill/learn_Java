@@ -44,6 +44,6 @@ public class Student implements Comparable<Student> {
 
     //Comparable接口的唯一一个方法；换言之，实现Compareable接口必须要实现compareTo()方法
     public int compareTo(Student other) {
-        return Integer.compare(score, other.score);
+        return Integer.compare(other.score, score);
     }
 }
