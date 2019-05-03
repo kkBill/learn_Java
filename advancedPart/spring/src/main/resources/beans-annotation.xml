@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--指定IoC容器扫描的包，最常规的用法
+    <context:component-scan base-package="annotation"></context:component-scan>
+    -->
+
+    <!--如果添加了resource-pattern 属性，则表示只扫描controller包下的类
+    <context:component-scan base-package="annotation" resource-pattern="controller/*.class"></context:component-scan>
+    -->
+
+    <!--
+        通过 exclude-filter子节点排除expression表达式对应的组件，
+        至于type属性，主要有以下几种：
+    "annotation" indicates an annotation to be present at the type level in target components;
+        expression属性的值是
+    "assignable" indicates a class (or interface) that the target components are assignable to (extend/implement);
+        expression属性的值是类或属性的名称
+    "aspectj" indicates an AspectJ type pattern expression to be matched by the target components;
+    "regex" indicates a regex pattern to be matched by the target components' class names;
+    "custom" indicates a custom implementation of the org.springframework.core.type.TypeFilter interface.
+     这块不懂！！！
+
+
+    <context:component-scan base-package="annotation">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+
+    -->
+    <!--
+    表示只包含expression表达式对应的组件，
+    若要起作用，要把use-default-filters设为false，因为默认的值是true，表示base_package包下面都扫描
+    -->
+    <!--
+    <context:component-scan base-package="annotation" use-default-filters="false">
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+    </context:component-scan>
+
+    -->
+    <!--和上面一样的效果，但是这里的type是assignable， 因此expression的值为类或接口的名称-->
+    <context:component-scan base-package="annotation" use-default-filters="false">
+        <context:include-filter type="assignable" expression="annotation.repository.UserRepository"/>
+    </context:component-scan>
+
+</beans>
