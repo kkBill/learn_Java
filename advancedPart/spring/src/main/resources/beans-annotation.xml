@@ -7,9 +7,9 @@
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!--指定IoC容器扫描的包，最常规的用法
+    <!--指定IoC容器扫描的包，最常规的用法 -->
     <context:component-scan base-package="annotation"></context:component-scan>
-    -->
+
 
     <!--如果添加了resource-pattern 属性，则表示只扫描controller包下的类
     <context:component-scan base-package="annotation" resource-pattern="controller/*.class"></context:component-scan>
@@ -43,9 +43,9 @@
     </context:component-scan>
 
     -->
-    <!--和上面一样的效果，但是这里的type是assignable， 因此expression的值为类或接口的名称-->
+    <!--和上面一样的效果，但是这里的type是assignable， 因此expression的值为类或接口的名称
     <context:component-scan base-package="annotation" use-default-filters="false">
         <context:include-filter type="assignable" expression="annotation.repository.UserRepository"/>
     </context:component-scan>
-
+    -->
 </beans>
