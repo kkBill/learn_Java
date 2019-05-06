@@ -45,24 +45,27 @@ public class JDBCTest {
 
     /*************演示SQL注入********/
     /**
-     *  正常情况下，通过id查询一个人的信息，只有id匹配，才能查看信息
+     *  正常情况下，只有用户名和密码匹配才能成功
      *  但是，通过SQL注入，就可以突破这样的限制
      */
     public static void testSQLInjection() throws Exception{
+        //正常情况，模拟正确输入的用户名和密码
+//        String username = "Tom";
+//        String password = "1234";
+//        String sql = "SELECT * FROM user WHERE username = '" + username
+//                    + "' AND "
+//                    + " password = '" + password + "' ";
 
-        //正常情况
-//        String ID = "9999";
-//        String sql = "SELECT * FROM student WHERE ID=" + ID;
+        //sql注入，恶意输入用户名和密码
+        String username = "a' OR password = ";
+        String password = " OR '1'='1";
 
-        /**
-         * 正常情况下，ID = 1234是查不到的！
-         * 但是经过SQL非法注入，就可以查询到!!!
-         * 这里，由于sql语句是通过拼接形成的，我加入了一个OR语句，使得WHERE条件判断成立，
-         * 从而即使ID是不存在的，仍然可以访问数据库
-         */
-        String ID = "1234";
-        String sql = "SELECT * FROM student WHERE ID=" + ID
-                      + " OR '" + 1 + "'='" + 1 + "'";//SELECT * FROM student WHERE ID=1234 OR '1'='1'
+        String sql = "SELECT * FROM user WHERE username = '" + username
+                + "' AND "
+                + " password = '" + password + "' ";
+
+        //上述sql语句等价于：SELECT * FROM user WHERE username = 'a' OR password = ' AND  password = ' OR '1'='1'
+
         System.out.println(sql);
         Connection connection = JDBCTools.getConnection();
         Statement statement = connection.createStatement();
@@ -72,11 +75,8 @@ public class JDBCTest {
             resultSet = statement.executeQuery(sql);
             if (resultSet.next()){
                 System.out.println("查询成功！");
-                Student student = new Student(resultSet.getString("ID"),
-                        resultSet.getString("Name"),
-                        resultSet.getString("Sex"),
-                        resultSet.getInt("Age"));
-                System.out.println(student);
+                System.out.println(resultSet.getString("username")
+                        + " " + resultSet.getString("password"));
             }
             else{
                 System.out.println("查询失败！");
