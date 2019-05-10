@@ -8,14 +8,18 @@ public class BookShopTest {
 
     private ApplicationContext ctx = null;
     private BookShopService bookShopService = null;
+    private Cashier cashier = null;
 
     {
         ctx = new ClassPathXmlApplicationContext("spring-jdbc.xml");
         bookShopService = (BookShopService) ctx.getBean("bookShopService");
+        cashier = (Cashier) ctx.getBean("cashier");
     }
 
     @Test
     public void testBookShopService(){
         bookShopService.purchase("AA","1001");
     }
+
+
 }

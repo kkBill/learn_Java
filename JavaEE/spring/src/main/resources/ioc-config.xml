@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="pet" class="demofornote.Pet"></bean>
+
+    <bean id="car" class="demofornote.Car"></bean>
+<!-- 构造器注入
+    <bean id="Tom" class="demofornote.Person">
+        <constructor-arg ref="pet" index="0"></constructor-arg>
+        <constructor-arg ref="car" index="1"></constructor-arg>
+    </bean>
+-->
+
+    <!--setter方法注入-->
+    <bean id="Tom" class="demofornote.Person">
+        <property name="pet" ref="pet"></property>
+        <property name="car" ref="car"></property>
+    </bean>
+
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+
+    </bean>
+
+
+</beans>

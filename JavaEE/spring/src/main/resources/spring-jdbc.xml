@@ -13,9 +13,14 @@
     <!--声明通过注解的方式进行装配-->
     <context:component-scan base-package="springJDBCTransaction"></context:component-scan>
 
-    <!--导入资源文件-->
-    <context:property-placeholder location="db.properties"></context:property-placeholder>
+    <!--这个也是导入配置资源文件的方式-->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location" value="db.properties"></property>
+    </bean>
 
+    <!--导入资源文件
+    <context:property-placeholder location="db.properties"></context:property-placeholder>
+-->
     <!--配置C3P0-->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="driverClass" value="${driverClass}"></property>
