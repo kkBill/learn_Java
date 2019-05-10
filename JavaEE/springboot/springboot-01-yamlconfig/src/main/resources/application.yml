@@ -1,0 +1,16 @@
+person:
+  name: Jerry
+  age: ${random.int[20,30]} #一个随机数
+  student: true
+  birthday: 1995/12/12
+  car:
+    brand: ${person.name:hello}_Tesla #输出 Jerry_Tesla or hello_Tesla
+    price: 450000
+  courses:
+    - Math
+    - English
+    - Algorithm
+  scores:
+    Math: 98
+    English: 90
+    Algorithm: 95
