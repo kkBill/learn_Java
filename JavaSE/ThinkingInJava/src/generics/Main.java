@@ -70,29 +70,16 @@ public class Main {
      */
     private static void test2(){
 
-        //从继承关系上看，Derived < Base < Object
-        List<Derived> derivedList = new ArrayList<>();
-        List<Base> baseList = new ArrayList<>();
-        List<Object> objectList = new ArrayList<>();
+        //List<? extends Number> foo = new ArrayList<Number>();  //① Number "extends" Number (in this context)
+        //List<? extends Number> foo = new ArrayList<Integer>(); //② Integer extends Number
+        List<? extends Number> foo = new ArrayList<Double>();  //③ Double extends Number
 
-        List<? extends Base> list1 = null;
-        List<? super Base> list2 = null;
+        Number number = foo.get(0);
+        //Double d = foo.get(0); //error
+        //Integer i = foo.get(0);
 
-        list1 = derivedList; // ok
-//        list1.add(new Base());// error
-//        list1.add(new Derived());// error
-        list1 = baseList; // ok
-//        list1.add(new Base());// error
-//        list1.add(new Derived());// error
-        //list1 = objectList; // error
+        //foo.add(new Double(1.1));
 
-        //list2 = derivedList; // error
-        list2 = baseList; // ok
-        list2.add(new Base());
-        list2.add(new Derived());
-        list2 = objectList; // ok
-        list2.add(new Base());
-        list2.add(new Derived());
     }
 
     public static void main(String[] args) {
