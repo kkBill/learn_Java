@@ -30,14 +30,13 @@ class SimpleThread extends Thread {
 public class ThreadTest {
     public static void main(String[] args) {
         SimpleThread thread0 = new SimpleThread();
-        //1、启动thread线程；
-        //2、调用当前线程的run()方法
-
-        thread0.setName("fasdjfbgvdgfjk thread");
+        System.out.println(thread0.getState());//状态为NEW
+        thread0.setName("线程1");
         thread0.start();
+        System.out.println(thread0.getState());//状态为RUNNABLE
 
         SimpleThread thread2 = new SimpleThread();
-        thread2.setName("zzzzz thread");
+        thread2.setName("线程2");
         thread2.start();
 
         new Thread() {
